@@ -17,6 +17,7 @@ use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\BufferHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
+use Symfony\Component\HttpKernel\DataCollector\LoggerDataCollector;
 
 /**
  * @var \WMDE\Fundraising\Frontend\Factories\FunFunFactory $ffFactory
@@ -66,6 +67,20 @@ $app->register( new Silex\Provider\ServiceControllerServiceProvider() );
 $app->register( new Silex\Provider\TwigServiceProvider() );
 $app->register( new Silex\Provider\UrlGeneratorServiceProvider() );
 
+
+
+$app->register(
+	new Silex\Provider\MonologServiceProvider(),
+	[
+		'monolog.logfile' => $ffFactory->getLoggingPath() . '/dev.log',
+		'monolog.name'    => 'MyAppName'
+	]
+);
+
+$ffFactory->setLogger( $app['logger'] );
+
+
+
 $app->register( new Silex\Provider\DoctrineServiceProvider() );
 
 $app['db'] = $ffFactory->getConnection();
@@ -74,6 +89,8 @@ $app['dbs'] = $app->share( function ( $app ) {
 	return [ 'default' => $app['db'] ];
 } );
 
+
+
 $app->register(
 	new Silex\Provider\WebProfilerServiceProvider(),
 	[
@@ -81,6 +98,8 @@ $app->register(
 		'profiler.mount_prefix' => '/_profiler',
 	]
 );
+
+
 
 $ffFactory->setProfiler( $app['stopwatch'] );
 
@@ -109,4 +128,8 @@ $app['twig.loader.filesystem'] = $app->share( $app->extend(
 	}
 ) );
 
+
+
+$app['logger']->alert('maw');
 $app->run();
+$app['logger']->alert('maww');

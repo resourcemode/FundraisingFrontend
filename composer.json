@@ -63,7 +63,8 @@
 
 		"symfony/browser-kit": "~2.7",
 		"silex/web-profiler": "~1.0",
-		"sorien/silex-dbal-profiler": "~1.1"
+		"sorien/silex-dbal-profiler": "~1.1",
+		"symfony/monolog-bridge": "~3.1"
 	},
 	"autoload": {
 		"psr-4": {
