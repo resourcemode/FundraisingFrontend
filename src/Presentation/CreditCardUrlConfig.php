@@ -13,23 +13,20 @@ class CreditCardUrlConfig {
 	const CONFIG_KEY_BASE_URL = 'base-url';
 	const CONFIG_KEY_PROJECT_ID = 'project-id';
 	const CONFIG_KEY_BACKGROUND_COLOR = 'background-color';
-	const CONFIG_KEY_SKIN = 'skin';
 	const CONFIG_KEY_THEME = 'theme';
 	const CONFIG_KEY_TESTMODE = 'testmode';
 
 	private $baseUrl;
 	private $projectId;
 	private $backgroundColor;
-	private $skin;
 	private $theme;
 	private $testMode;
 
-	private function __construct( string $baseUrl, string $projectId, string $backgroundColor, string $skin, string $theme,
+	private function __construct( string $baseUrl, string $projectId, string $backgroundColor, string $theme,
 								  bool $testMode ) {
 		$this->baseUrl = $baseUrl;
 		$this->projectId = $projectId;
 		$this->backgroundColor = $backgroundColor;
-		$this->skin = $skin;
 		$this->theme = $theme;
 		$this->testMode = $testMode;
 	}
@@ -44,9 +41,8 @@ class CreditCardUrlConfig {
 			$config[self::CONFIG_KEY_BASE_URL],
 			$config[self::CONFIG_KEY_PROJECT_ID],
 			$config[self::CONFIG_KEY_BACKGROUND_COLOR],
-			$config[self::CONFIG_KEY_SKIN],
 			$config[self::CONFIG_KEY_THEME],
-			$config[self::CONFIG_KEY_TESTMODE]
+			(bool) $config[self::CONFIG_KEY_TESTMODE]
 		) )->assertNoEmptyFields();
 	}
 
@@ -70,10 +66,6 @@ class CreditCardUrlConfig {
 
 	public function getBackgroundColor(): string {
 		return $this->backgroundColor;
-	}
-
-	public function getSkin(): string {
-		return $this->skin;
 	}
 
 	public function getTheme(): string {
