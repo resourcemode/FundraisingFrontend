@@ -208,6 +208,7 @@ a.button:active { text-decoration: none;
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fdd800', endColorstr='#fbc900',GradientType=0 );
 }
 button[type="submit"] [class^="icon-"],
+button[type="button"] [class^="icon-"],
 input[type=button] [class^="icon-"],
 a.button [class^="icon-"] { font-size: 1.2em; position: relative; top: 2px; padding-left: 10px; color: #FFF; margin-right: -5px; display: inline-block; width: 0; }
 
