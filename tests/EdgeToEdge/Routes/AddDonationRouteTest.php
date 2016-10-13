@@ -103,6 +103,7 @@ class AddDonationRouteTest extends WebRouteTestCase {
 
 	private function newValidFormInput() {
 		return [
+			'locale' => 'de_DE',
 			'betrag' => '5,51',
 			'zahlweise' => 'BEZ',
 			'periode' => 0,
@@ -249,6 +250,7 @@ class AddDonationRouteTest extends WebRouteTestCase {
 
 	private function newValidBankTransferInput() {
 		return [
+			'locale' => 'de_DE',
 			'betrag' => '12,34',
 			'zahlweise' => 'UEB',
 			'periode' => 0,
@@ -300,6 +302,7 @@ class AddDonationRouteTest extends WebRouteTestCase {
 
 	private function newComplementableFormInput() {
 		return [
+			'locale' => 'de_DE',
 			'betrag' => '5,51',
 			'zahlweise' => 'BEZ',
 			'periode' => 0,
@@ -343,6 +346,7 @@ class AddDonationRouteTest extends WebRouteTestCase {
 
 	private function newValidPayPalInput() {
 		return [
+			'locale' => 'de_DE',
 			'betrag' => '12,34',
 			'zahlweise' => 'PPL',
 			'periode' => 3,
@@ -369,6 +373,7 @@ class AddDonationRouteTest extends WebRouteTestCase {
 
 	private function newValidCreditCardInput() {
 		return [
+			'locale' => 'de_DE',
 			'betrag' => '12,34',
 			'zahlweise' => 'MCP',
 			'periode' => 3,
@@ -429,6 +434,7 @@ class AddDonationRouteTest extends WebRouteTestCase {
 
 	private function newInvalidFormInput() {
 		return [
+			'locale' => 'de_DE',
 			'betrag' => '0',
 			'zahlweise' => 'BEZ',
 			'periode' => 3,
@@ -480,6 +486,7 @@ class AddDonationRouteTest extends WebRouteTestCase {
 
 	private function newAnonymousFormInput() {
 		return [
+			'locale' => 'de_DE',
 			'betrag' => '0',
 			'zahlweise' => 'UEB',
 			'periode' => 1,
@@ -548,6 +555,7 @@ class AddDonationRouteTest extends WebRouteTestCase {
 				'GET',
 				'/',
 				[
+					'locale' => 'de_DE',
 					'betrag' => '5,00',
 					'periode' => 3,
 					'zahlweise' => 'BEZ'
@@ -568,6 +576,7 @@ class AddDonationRouteTest extends WebRouteTestCase {
 				'GET',
 				'/',
 				[
+					'locale' => 'de_DE',
 					'betrag' => '5,00',
 					'periode' => 3,
 					'zahlweise' => 'Eh bien, mon prince. Gênes et Lucques ne sont plus que des apanages, des поместья, de la ' .
@@ -594,6 +603,7 @@ class AddDonationRouteTest extends WebRouteTestCase {
 				'GET',
 				'/',
 				[
+					'locale' => 'de_DE',
 					'betrag' => '5,00',
 					'zahlweise' => 'BEZ'
 				]
@@ -622,6 +632,7 @@ class AddDonationRouteTest extends WebRouteTestCase {
 			'POST',
 			'/donation/add',
 			[
+				'locale' => 'de_DE',
 				'addressType' => 'anonym',
 				'betrag' => '12,34',
 				'periode' => '0',

@@ -64,4 +64,37 @@ class NewDonationRouteTest extends WebRouteTestCase {
 		];
 	}
 
+	public function testNoLocaleParameterGiven_amountIsParsedUsingDefaultLocale() {
+		$client = $this->createClient();
+		$client->request(
+			'POST',
+			'/donation/new',
+			[
+				'amountGiven' => '123.45',
+				'zahlweise' => 'BEZ',
+				'periode' => 0
+			]
+		);
+
+		$this->assertContains( 'Payment data: valid', $client->getResponse()->getContent() );
+		$this->assertContains( 'Amount: 123,45', $client->getResponse()->getContent() );
+	}
+
+	public function testGivenLocaleParameter_amountIsParsedUsingGivenLocale() {
+		$client = $this->createClient();
+		$client->request(
+			'POST',
+			'/donation/new',
+			[
+				'amountGiven' => '123,45',
+				'locale' => 'de_DE',
+				'zahlweise' => 'BEZ',
+				'periode' => 0
+			]
+		);
+
+		$this->assertContains( 'Payment data: valid', $client->getResponse()->getContent() );
+		$this->assertContains( 'Amount: 123,45', $client->getResponse()->getContent() );
+	}
+
 }

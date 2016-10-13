@@ -94,7 +94,10 @@ class AddDonationHandler {
 	private function createDonationRequest( Request $request ): AddDonationRequest {
 		$donationRequest = new AddDonationRequest();
 
-		$donationRequest->setAmount( $this->getEuroAmountFromString( $request->get( 'betrag', '' ) ) );
+		$donationRequest->setAmount( $this->getEuroAmountFromString(
+			$request->get( 'betrag', '' ),
+			$request->get( 'locale' )
+		) );
 
 		$donationRequest->setPaymentType( $request->get( 'zahlweise', '' ) );
 		$donationRequest->setInterval( intval( $request->get( 'periode', 0 ) ) );
@@ -166,8 +169,7 @@ class AddDonationHandler {
 		return $this->ffFactory->newBankDataConverter()->getBankDataFromAccountData( $account, $bankCode );
 	}
 
-	private function getEuroAmountFromString( string $amount ): Euro {
-		$locale = 'de_DE'; // TODO: make this configurable for multilanguage support
+	private function getEuroAmountFromString( string $amount, string $locale = null ): Euro {
 		try {
 			return Euro::newFromFloat( ( new AmountParser( $locale ) )->parseAsFloat( $amount ) );
 		} catch ( \InvalidArgumentException $ex ) {
