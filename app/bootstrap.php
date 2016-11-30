@@ -31,7 +31,7 @@ $app['request_is_jsonp'] = $app->protect( function ( Request $request ) {
 		'application/json; charset=utf-8',
 		'application/javascript',
 	];
-	return $request->get( 'jsonp_callback' ) !== null &&
+	return $request->get( 'callback' ) !== null &&
 		$request->getMethod() === 'GET' &&
 		count( array_intersect( $jsonpContentTypes, $request->getAcceptableContentTypes() ) ) > 0;
 } );
@@ -61,14 +61,11 @@ $app->before(
 
 $app->after( function( Request $request, Response $response, Application $app ) {
 	if ( $app['request_stack.is_jsonp'] ) {
-		// For request content type application/javascript response can be something else than JsonResponse
-		if ( $response instanceof JsonResponse ) {
-			$response->setCallBack( $request->get( 'jsonp_callback' ) );
-		} else {
-			$response->setContent(
-				$request->get( 'jsonp_callback' ) .	'(' . $response->getContent() . ');'
-			);
+		if ( !( $response instanceof JsonResponse ) ) {
+			throw new \RuntimeException( "Route did not return JsonResponse for JSONP request" );
 		}
+		$response->setCallBack( $request->get( 'callback' ) );
+	// Format JSON responses nicely
 	} elseif( $response instanceof JsonResponse ) {
 		$response->setEncodingOptions( JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
 	}
