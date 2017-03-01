@@ -7,7 +7,7 @@ add-apt-repository ppa:ondrej/php -y
 curl -sL https://deb.nodesource.com/setup_6.x | bash -
 
 apt-get update
-#apt-get upgrade -y
+apt-get upgrade -y
 
 # Avoid MySQL password prompt
 export DEBIAN_FRONTEND="noninteractive"
